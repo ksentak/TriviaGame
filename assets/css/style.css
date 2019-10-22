@@ -1,0 +1,23 @@
+body {
+    background-image: url("../images/memphis-colorful.png");
+    background-size: cover;
+}
+
+#triviaCenter {
+background-color: salmon;
+margin-top: 50px;
+height: 450px;
+}
+
+h1 {
+    color: white;
+    font-size: 75px;
+    margin-top: 25px;
+}
+
+#startbtn {
+    margin-top: 125px;
+    height: 75px;
+    width: 150px;
+    font-size: 25px;
+}
