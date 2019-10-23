@@ -15,6 +15,12 @@ h1 {
     margin-top: 25px;
 }
 
+#timer {
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+}
+
 #startbtn {
     margin-top: 125px;
     height: 75px;
