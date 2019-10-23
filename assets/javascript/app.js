@@ -4,9 +4,13 @@ $(document).ready(function() {
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unansweredQuestions = 0;
+var timeLeft = 120;
+var intervalId;
+
+
+//-------------------------------------------------------------------------------------------------
 
 //Create my array of questions
-
 var triviaQuestions = [
     {
         question: "California is home to how many pro football teams?",
@@ -99,12 +103,26 @@ var triviaQuestions = [
     },
 ]
 
+//=====================================================================================================
+
+//Functions
+
 //New Game function that hides timer/# of correct & incorrect answers
-function newGame() {
+function replayQuiz() {
     $("#timer").hide();
     $("#questions").hide();
     $("#results").hide();
+
 }
+
+function countDown() {
+    clearInterval(intervalId);
+    intervalId = setInterval(decrement, 1000);
+  }
+
+  function decrement() {
+    timeLeft--;
+  }
 
 
 
@@ -115,7 +133,19 @@ $("#startbtn").on("click", function() {
     $("#timer").show();
     $("#questions").show();
 
+
+
 //Also on click a timer appears at the top and begins to count down until questions are answered or time is up
+    function countDown() {
+    clearInterval(intervalId);
+    intervalId = setInterval(decrement, 1000);
+  }
+
+  function decrement() {
+    timeLeft--;
+    $("#timer").html("<h2>Time Left: " + timeLeft + "</h2>");
+
+  }
 
 
 });
@@ -137,4 +167,3 @@ $("#startbtn").on("click", function() {
 //if question is not answered tally an unanswered question
 
 });
-
