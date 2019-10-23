@@ -108,13 +108,14 @@ var triviaQuestions = [
 //Functions
 
 //New Game function that hides timer/# of correct & incorrect answers
-function replayQuiz() {
-    $("#timer").hide();
-    $("#questions").hide();
-    $("#results").hide();
+// function replayQuiz() {
+//     $("#timer").hide();
+//     $("#questions").hide();
+//     $("#results").hide();
 
-}
+// }
 
+//Functions used to createe the countdown timer
 function countDown() {
     clearInterval(intervalId);
     intervalId = setInterval(decrement, 1000);
@@ -122,7 +123,10 @@ function countDown() {
 
   function decrement() {
     timeLeft--;
+    $("#timer").html("<h2>Time Left: " + timeLeft + "</h2>");
   }
+
+  //Have to write an if statement when timer = 0 to hide time/questions and display results
 
 
 
@@ -132,20 +136,11 @@ $("#startbtn").on("click", function() {
     $("#letsplay").remove();
     $("#timer").show();
     $("#questions").show();
+    countDown();
+
+    //Need to now display questions
 
 
-
-//Also on click a timer appears at the top and begins to count down until questions are answered or time is up
-    function countDown() {
-    clearInterval(intervalId);
-    intervalId = setInterval(decrement, 1000);
-  }
-
-  function decrement() {
-    timeLeft--;
-    $("#timer").html("<h2>Time Left: " + timeLeft + "</h2>");
-
-  }
 
 
 });
