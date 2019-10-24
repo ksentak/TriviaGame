@@ -194,12 +194,21 @@ $(document).ready(function() {
         countDown();
         displayQuestions();
         //correctAnswers();
+    });
+
+    $(".answerbutton").on("click", function() {
+        questionCount++;
+        displayQuestions();
+    });
+
+
+
+
+
+
+
 });
 
-
-
-
-
-});
+//https://github.com/CodeExplainedRepo/Multiple-Choice-Quiz-JavaScript/blob/master/quiz.js
 
 
