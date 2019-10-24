@@ -6,11 +6,20 @@ $(document).ready(function() {
     var unansweredQuestions = 0;
     var timeLeft = 120;
     var intervalId;
+    var questionCount = 0;
+
+    $("#trivia").hide();
+
+    var question = document.getElementById("question");
+    var choice1 = document.getElementById("A");
+    var choice2 = document.getElementById("B");
+    var choice3 = document.getElementById("C");
+    var choice4 = document.getElementById("D");
 
 
 //===================================================================================================
 
-//Create my array of questions
+// Create my array of questions
     var triviaQuestions = [
         {
         question: "California is home to how many pro football teams?",
@@ -108,12 +117,13 @@ $(document).ready(function() {
 //Functions
 
 //New Game function that hides timer/# of correct & incorrect answers
-    // function replayQuiz() {
-    //     $("#timer").hide();
-    //     $("#questions").hide();
-    //     $("#results").hide();
-
-// }
+    function newGame() {
+        $("#startbtn").hide();
+        $("#letsplay").hide();
+        $("#timer").show();
+        $("#trivia").show();
+        $("#results").hide();
+    }
 
 //=====================================================================================================
 
@@ -130,7 +140,7 @@ $(document).ready(function() {
 //When timer = 0 results are displayed and everything else is hidden
         if (timeLeft == 0) {
             $("#timer").hide();
-            $("#questions").hide();
+            $("#trivia").hide();
             alert("Time's up! Let's view your results!")
             $("#results").show();
         }
@@ -138,7 +148,15 @@ $(document).ready(function() {
 
 //======================================================================================================
     function displayQuestions() {
+            let q = triviaQuestions[questionCount];
+            
+            question.innerHTML = "<p>"+ q.question +"</p>";
+            choice1.innerHTML = q.choice1;
+            choice2.innerHTML = q.choice2;
+            choice3.innerHTML = q.choice3;
+            choice4.innerHTML = q.choice4;
 
+        
         //This function will work to display qustions to the screen
     }
 
@@ -172,12 +190,9 @@ $(document).ready(function() {
 
 //When start is clicked, the button disappears and trivia game begins 
     $("#startbtn").on("click", function() {
-        $("#startbtn").hide();
-        $("#letsplay").hide();
-        $("#timer").show();
-        $("#questions").show(); //still have to create a div to display them on the screen
+        newGame(); //still have to create a div to display them on the screen
         countDown();
-        //displayQuestions();
+        displayQuestions();
         //correctAnswers();
 });
 
@@ -186,3 +201,5 @@ $(document).ready(function() {
 
 
 });
+
+
