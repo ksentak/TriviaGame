@@ -8,7 +8,7 @@ $(document).ready(function() {
     var intervalId;
 
 
-//-------------------------------------------------------------------------------------------------
+//===================================================================================================
 
 //Create my array of questions
     var triviaQuestions = [
@@ -115,7 +115,9 @@ $(document).ready(function() {
 
 // }
 
-//Functions used to createe the countdown timer
+//=====================================================================================================
+
+//Functions used to create the countdown timer
     function countDown() {
         clearInterval(intervalId);
         intervalId = setInterval(decrement, 1000);    
@@ -124,14 +126,49 @@ $(document).ready(function() {
     function decrement() {
         timeLeft--;
         $("#timer").html("<h2>Time Left: " + timeLeft + "</h2>");
+
+//When timer = 0 results are displayed and everything else is hidden
+        if (timeLeft == 0) {
+            $("#timer").hide();
+            $("#questions").hide();
+            alert("Time's up! Let's view your results!")
+            $("#results").show();
+        }
     }
 
-  //Have to write an if statement when timer = 0 to hide time/questions and display results
-
+//======================================================================================================
     function displayQuestions() {
+
         //This function will work to display qustions to the screen
     }
 
+//=======================================================================================================
+//Function that keeps track of correct/incorrect/unanswered questions
+//if answer is correct tally a correct answer
+//if answer is not correct tally an incorrect answer
+//if question is not answered tally an unanswered question
+    
+    function correctIncorrect () {
+        if (answerChoice == answer) {
+            correctAnswers++;
+            console.log(correctAnswers);
+            $("#correct").text("Wins: " + correctAnswers);
+        } 
+        
+        else if (answerChoice != answer) {
+            incorrectAnswers++;
+            console.log(incorrectAnswers);
+            $("#incorrect").text("Losses: " + incorrectAnswers);
+        }
+        
+        else {
+            unansweredQuestions++;
+            console.log(unansweredQuestions);
+            $("#unanswered").text("Unanswered: " + unansweredQuestions);
+
+        }
+     }
+//==========================================================================================================
 
 //When start is clicked, the button disappears and trivia game begins 
     $("#startbtn").on("click", function() {
@@ -140,24 +177,12 @@ $(document).ready(function() {
         $("#timer").show();
         $("#questions").show(); //still have to create a div to display them on the screen
         countDown();
-
-    //Make a function to now display questions displayQuestions();
+        //displayQuestions();
+        //correctAnswers();
 });
 
 
-//A question appears with 4 multiple choice selections to choose from
-
-//Answer buttons 1-4 match input from an array?
-//on click of one of the four answer buttons move on to the next question
-//if timer runs out move to next question
-
-//Reset timer each time a new question appears 
 
 
-// if statements
-
-//if answer is correct tally a correct answer
-//if answer is not correct tally an incorrect answer
-//if question is not answered tally an unanswered question
 
 });
