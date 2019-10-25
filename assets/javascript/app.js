@@ -4,7 +4,7 @@ $(document).ready(function() {
     var correctAnswers = 0;
     var incorrectAnswers = 0;
     var unansweredQuestions = 0;
-    var timeLeft = 120;
+    var timeLeft = 15;
     var intervalId;
     var questionCount = 0;
 
@@ -16,7 +16,6 @@ $(document).ready(function() {
     var choice3 = document.getElementById("C");
     var choice4 = document.getElementById("D");
 
-
 //===================================================================================================
 
 // Create my array of questions
@@ -27,7 +26,7 @@ $(document).ready(function() {
         choice2: "Two",
         choice3: "Three",
         choice4: "Four",
-        answer: "Four",
+        answer: "4",
         },
 
         {
@@ -36,7 +35,7 @@ $(document).ready(function() {
         choice2: "Chicago Bears",
         choice3: "Indianapolis Colts",
         choice4: "New York Giants",
-        answer: "Detriot Lions",
+        answer: "1",
         },
 
         {
@@ -45,7 +44,7 @@ $(document).ready(function() {
         choice2: "Memphis",
         choice3: "St. Louis",
         choice4: "San Antonio",
-        answer: "St. Louis",
+        answer: "3",
         },
 
         {
@@ -54,7 +53,7 @@ $(document).ready(function() {
         choice2: "3",
         choice3: "10",
         choice4: "18",
-        answer: "18",
+        answer: "4",
         },
 
         {
@@ -63,7 +62,7 @@ $(document).ready(function() {
         choice2: "Oakland Raiders",
         choice3: "Jacksonville Jaguars",
         choice4: "Arizona Cardinals",
-        answer: "Oakland Raiders",
+        answer: "2",
         },
 
         {  
@@ -72,7 +71,7 @@ $(document).ready(function() {
         choice2: "Pittsburgh Steelers",
         choice3: "Denver Broncos",
         choice4: "New York Jets",
-        answer: "New England Patriots",
+        answer: "1",
         },
 
         {
@@ -81,7 +80,7 @@ $(document).ready(function() {
         choice2: "Miami Dolphins",
         choice3: "New England Patriots",
         choice4: "Kansas City Chiefs",
-        answer: "Miami Dolphins",
+        answer: "2",
         },
 
         {
@@ -90,7 +89,7 @@ $(document).ready(function() {
         choice2: "MetLife Stadium",
         choice3: "AT&T Stadium",
         choice4: "Lincoln Financial Field",
-        answer: "Lincoln Financial Field",
+        answer: "4",
         },
 
         {
@@ -99,7 +98,7 @@ $(document).ready(function() {
         choice2: "Baltimore",
         choice3: "Cleveland",
         choice4: "Cincinnati",
-        answer: "Cleveland",
+        answer: "3",
         },
 
         {
@@ -108,7 +107,16 @@ $(document).ready(function() {
         choice2: "New York City, NY",
         choice3: "Washington D.C.",
         choice4: "Miami, FL",
-        answer: "Canton, OH",
+        answer: "1",
+        },
+
+        {
+        question: "",
+        choice1: "",
+        choice2: "",
+        choice3: "",
+        choice4: "",
+        answer: "",
         },
     ]      
 
@@ -123,14 +131,26 @@ $(document).ready(function() {
         $("#timer").show();
         $("#trivia").show();
         $("#results").hide();
+
+        //Reset correct and incorrect
     }
 
 //=====================================================================================================
 
 //Functions used to create the countdown timer
+    function resetTimer() {
+        timeLeft = 15;
+        $("#timer").html("<h2>Time Left: " + timeLeft + "</h2>");
+        countDown();
+    }
+
     function countDown() {
         clearInterval(intervalId);
         intervalId = setInterval(decrement, 1000);    
+    }
+    
+    function stopTimer () {
+        clearInterval(intervalId);
     }
 
     function decrement() {
@@ -139,14 +159,17 @@ $(document).ready(function() {
 
 //When timer = 0 results are displayed and everything else is hidden
         if (timeLeft == 0) {
-            $("#timer").hide();
-            $("#trivia").hide();
-            alert("Time's up! Let's view your results!")
-            $("#results").show();
-        }
+            unansweredQuestions++;
+            console.log(unansweredQuestions);
+            console.log("You ran out of time!");
+            resetTimer();
+            questionCount++;
+            displayQuestions();
+        } 
     }
 
 //======================================================================================================
+//This function will work to display qustions to the screen
     function displayQuestions() {
             let q = triviaQuestions[questionCount];
             
@@ -156,59 +179,60 @@ $(document).ready(function() {
             choice3.innerHTML = q.choice3;
             choice4.innerHTML = q.choice4;
 
-        
-        //This function will work to display qustions to the screen
+            if (questionCount > 9) {
+                alert("The quiz is now over. Let's see your results.");
+                stopTimer();
+                $("#timer").hide();
+                $("#trivia").hide();
+                showResults();            
+            }        
     }
 
 //=======================================================================================================
-//Function that keeps track of correct/incorrect/unanswered questions
-//if answer is correct tally a correct answer
-//if answer is not correct tally an incorrect answer
-//if question is not answered tally an unanswered question
-    
-    function correctIncorrect () {
-        if (answerChoice == answer) {
-            correctAnswers++;
-            console.log(correctAnswers);
-            $("#correct").text("Wins: " + correctAnswers);
-        } 
-        
-        else if (answerChoice != answer) {
-            incorrectAnswers++;
-            console.log(incorrectAnswers);
-            $("#incorrect").text("Losses: " + incorrectAnswers);
-        }
-        
-        else {
-            unansweredQuestions++;
-            console.log(unansweredQuestions);
-            $("#unanswered").text("Unanswered: " + unansweredQuestions);
+    function showResults() {
+        $("#results").show();
+        $("#correctanswers").html("<h3> Correct Answers: "+correctAnswers+"</h3>");
+        $("#incorrectanswers").html("<h3> Incorrect Answers: "+incorrectAnswers+"</h3>");
+        $("#unansweredquestions").html("<h3> Unanswered Questions: "+unansweredQuestions+"</h3>");
 
-        }
-     }
-//==========================================================================================================
 
+    }
+
+//=======================================================================================================
 //When start is clicked, the button disappears and trivia game begins 
     $("#startbtn").on("click", function() {
-        newGame(); //still have to create a div to display them on the screen
+        newGame(); 
+        resetTimer(); 
         countDown();
         displayQuestions();
-        //correctAnswers();
     });
 
     $(".answerbutton").on("click", function() {
+        var userAnswer = $(this).val(); //gotta figure out how to get the value of the button clicked
+        console.log(userAnswer);
+        console.log(triviaQuestions[questionCount].answer);
+        resetTimer();
+        
+        
+        if (userAnswer == triviaQuestions[questionCount].answer) {
+             correctAnswers++;
+             console.log(correctAnswers);
+             console.log("Correct!");
+
+        }
+
+        else {
+            incorrectAnswers++;
+            console.log(incorrectAnswers);
+            console.log("Wrong!");
+        }
+
         questionCount++;
         displayQuestions();
+        
     });
-
-
-
-
-
-
 
 });
 
-//https://github.com/CodeExplainedRepo/Multiple-Choice-Quiz-JavaScript/blob/master/quiz.js
 
 
