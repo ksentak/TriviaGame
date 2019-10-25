@@ -12,40 +12,34 @@
 
 </head>
 <body> 
-
-
+    
     <div class="containter">
         <div class="row">
             <div class= "col-md-8 offset-md-2 text-center" id="triviaCenter">
                 <h1 id="letsplay">Let's Play a Trivia Game!</h1> <!--Maybe add google font-->
                 <h3 id="timer"></h3>
+                
                 <div id="trivia">
-
                     <h2 id="question"></h2>
-                    
                     <button type="button" value="1" class="btn btn-light answerbutton" id="A"></button>
                     <button type="button" value="2" class="btn btn-light answerbutton" id="B"></button>
                     <button type="button" value="3" class="btn btn-light answerbutton" id="C"></button>
                     <button type="button" value="4" class="btn btn-light answerbutton" id="D"></button>
-
-
-
-
                 </div>
+
                 <div id="results">
-                    <h2>Results</h2>
+                    <h2>Results:</h2>
                     <div id="correctanswers"></div>
                     <div id="incorrectanswers"></div>
                     <div id="unansweredquestions"></div>
                     <button type="button" class="btn btn-light reset" id="reset">Play Again?</button>
-                
                 </div>
+                
                 <button type="button" class="btn btn-light" id="startbtn">Start</button>
+            
             </div>
-
         </div>  
     </div>
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="assets/javascript/app.js"></script>

@@ -1,6 +1,8 @@
 body {
-    background-image: url("../images/memphis-colorful.png");
+    background-image: url("../images/football-no-lines.png");
     background-size: cover;
+    background-color: #009400;
+
 }
 
 #triviaCenter {
@@ -34,8 +36,12 @@ h1 {
 }
 
 #results {
-    margin-top: 100px;
+    margin-top: 75px;
     color: white;
+}
+
+#results h2 {
+    font-size: 45px;
 }
 
 #unansweredquestions {
