@@ -11,8 +11,6 @@ $(document).ready(function() {
     $("#trivia").hide();
     $("#results").hide();
 
-
-
     var question = document.getElementById("question");
     var choice1 = document.getElementById("A");
     var choice2 = document.getElementById("B");
@@ -139,7 +137,6 @@ $(document).ready(function() {
         incorrectAnswers = 0;
         unansweredQuestions = 0;
         timeLeft = 15;
-
     }
 
 //New Game function that starts the quiz
@@ -149,11 +146,7 @@ $(document).ready(function() {
         $("#timer").show();
         $("#trivia").show();
         $("#results").hide();
-
-        //Reset correct and incorrect
     }
-
-//=====================================================================================================
 
 //Functions used to create the countdown timer
     function resetTimer() {
@@ -175,7 +168,7 @@ $(document).ready(function() {
         timeLeft--;
         $("#timer").html("<h2>Time Left: " + timeLeft + "</h2>");
 
-//When timer = 0 results are displayed and everything else is hidden
+//When timer = 0, an unanswered question is tallied and the next question appears
         if (timeLeft == 0) {
             unansweredQuestions++;
             console.log(unansweredQuestions);
@@ -185,8 +178,6 @@ $(document).ready(function() {
             displayQuestions();
         } 
     }
-
-//======================================================================================================
 
 //This function will work to display qustions to the screen
     function displayQuestions() {
@@ -198,6 +189,7 @@ $(document).ready(function() {
             choice3.innerHTML = q.choice3;
             choice4.innerHTML = q.choice4;
 
+            //Ends the quiz after the questions are finished and displays results
             if (questionCount > 9) {
                 alert("The quiz is now over. Let's see your results.");
                 stopTimer();
@@ -207,19 +199,18 @@ $(document).ready(function() {
             }        
     }
 
-//=======================================================================================================
+//Displays results when called upon 
     function showResults() {
         $("#results").show();
         $("#correctanswers").html("<h3> Correct Answers: "+correctAnswers+"</h3>");
         $("#incorrectanswers").html("<h3> Incorrect Answers: "+incorrectAnswers+"</h3>");
         $("#unansweredquestions").html("<h3> Unanswered Questions: "+unansweredQuestions+"</h3>");
-
-
     }
 
 //=======================================================================================================
+//On-clicks
 
-//When start is clicked, the button disappears and trivia game begins 
+//When start is clicked, the quiz begins 
     $("#startbtn").on("click", function() {
         newGame(); 
         resetTimer(); 
@@ -227,13 +218,12 @@ $(document).ready(function() {
         displayQuestions();
     });
 
-//Code for answer button clicks
+//When answer button is clicked calculates whether answer was correct or incorrect
     $(".answerbutton").on("click", function() {
-        var userAnswer = $(this).val(); //gotta figure out how to get the value of the button clicked
+        var userAnswer = $(this).val();
         console.log(userAnswer);
         console.log(triviaQuestions[questionCount].answer);
         resetTimer();
-        
         
         if (userAnswer == triviaQuestions[questionCount].answer) {
              correctAnswers++;
@@ -250,17 +240,13 @@ $(document).ready(function() {
 
         questionCount++;
         displayQuestions();
-        
+    
     });
     
+    //Restarts the quiz without refreshing
     $("#reset").on("click", function() {
         reset();
 
     });
 
-
-
 });
-
-
-
