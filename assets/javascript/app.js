@@ -9,6 +9,9 @@ $(document).ready(function() {
     var questionCount = 0;
 
     $("#trivia").hide();
+    $("#results").hide();
+
+
 
     var question = document.getElementById("question");
     var choice1 = document.getElementById("A");
@@ -124,7 +127,22 @@ $(document).ready(function() {
 
 //Functions
 
-//New Game function that hides timer/# of correct & incorrect answers
+//Resets everything and brings you back to start menu
+    function reset() {
+        $("#startbtn").show();
+        $("#letsplay").show();
+        $("#trivia").hide();
+        $("#results").hide();
+        resetTimer();
+        questionCount = 0;
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        unansweredQuestions = 0;
+        timeLeft = 15;
+
+    }
+
+//New Game function that starts the quiz
     function newGame() {
         $("#startbtn").hide();
         $("#letsplay").hide();
@@ -169,6 +187,7 @@ $(document).ready(function() {
     }
 
 //======================================================================================================
+
 //This function will work to display qustions to the screen
     function displayQuestions() {
             let q = triviaQuestions[questionCount];
@@ -199,6 +218,7 @@ $(document).ready(function() {
     }
 
 //=======================================================================================================
+
 //When start is clicked, the button disappears and trivia game begins 
     $("#startbtn").on("click", function() {
         newGame(); 
@@ -207,6 +227,7 @@ $(document).ready(function() {
         displayQuestions();
     });
 
+//Code for answer button clicks
     $(".answerbutton").on("click", function() {
         var userAnswer = $(this).val(); //gotta figure out how to get the value of the button clicked
         console.log(userAnswer);
@@ -231,6 +252,13 @@ $(document).ready(function() {
         displayQuestions();
         
     });
+    
+    $("#reset").on("click", function() {
+        reset();
+
+    });
+
+
 
 });
 

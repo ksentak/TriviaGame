@@ -4,7 +4,7 @@ body {
 }
 
 #triviaCenter {
-background-color: blue;
+background-color: #013369;
 margin-top: 50px;
 height: 450px;
 }
@@ -16,7 +16,7 @@ h1 {
 }
 
 #timer {
-    color: white;
+    color: #D50A0A;
     font-weight: bold;
     font-size: 35px;
 }
@@ -26,4 +26,18 @@ h1 {
     height: 75px;
     width: 150px;
     font-size: 25px;
+}
+
+#question {
+    color: white;
+    margin-top: 50px;
+}
+
+#results {
+    margin-top: 100px;
+    color: white;
+}
+
+#unansweredquestions {
+    margin-bottom: 25px;
 }
